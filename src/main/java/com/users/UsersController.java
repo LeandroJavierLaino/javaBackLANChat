@@ -20,7 +20,7 @@ public class UsersController {
     @PostMapping("/users")
     public String newUser(@RequestBody User user) {
         List<User> userFind = repository.findByUsername(user.getUsername());
-
+        
         if (userFind.isEmpty())
             repository.save(user);
 

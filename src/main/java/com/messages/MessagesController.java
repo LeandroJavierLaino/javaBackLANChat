@@ -3,6 +3,8 @@ package com.messages;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -52,5 +54,12 @@ public class MessagesController {
         repository.deleteAll();
 
         return "Messages were deleted";
+    }
+
+    @PostMapping("/messages")
+    public String newUser(@RequestBody Message message) {
+        repository.save(message);
+
+        return message.getMessage();
     }
 }
