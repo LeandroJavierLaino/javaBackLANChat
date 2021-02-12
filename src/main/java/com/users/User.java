@@ -1,6 +1,11 @@
 package com.users;
 
+import org.springframework.data.annotation.Id;
+
 public class User {
+    @Id
+    private String id;
+
     private String username;
 
     public User() {
@@ -20,6 +25,6 @@ public class User {
 
     @Override
     public String toString() {
-        return String.format("User [  username='%s' ]", this.username);
+        return String.format("User [ id='%s',  username='%s' ]", this.id, this.username);
     }
 }

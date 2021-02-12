@@ -57,9 +57,17 @@ public class MessagesController {
     }
 
     @PostMapping("/messages")
-    public String newUser(@RequestBody Message message) {
+    public String newUser(@RequestBody Message message) throws JsonProcessingException {
         repository.save(message);
 
-        return message.getMessage();
+        List<Message> messages = repository.findAll();
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        try {
+            return mapper.writeValueAsString(messages);
+        } catch (JsonGenerationException e) {
+            throw e;
+        }
     }
 }
