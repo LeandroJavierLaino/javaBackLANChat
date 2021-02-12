@@ -18,13 +18,13 @@ public class UsersController {
     private UserRepository repository;
 
     @PostMapping("/users")
-    public String newUser(@RequestBody User user) {
+    public User newUser(@RequestBody User user) {
         List<User> userFind = repository.findByUsername(user.getUsername());
-        
-        if (userFind.isEmpty())
-            repository.save(user);
 
-        return user.getUsername();
+        if (userFind.isEmpty())
+            return repository.save(user);
+
+        return userFind.get(0);
     }
 
     @GetMapping("/users")
